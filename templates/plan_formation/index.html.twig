@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PlanFormation index{% endblock %}
+
+{% block body %}
+    <h1>PlanFormation index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Numero</th>
+                <th>Date</th>
+                <th>Salle</th>
+                <th>Description</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for plan_formation in plan_formations %}
+            <tr>
+                <td>{{ plan_formation.id }}</td>
+                <td>{{ plan_formation.numero }}</td>
+                <td>{{ plan_formation.date ? plan_formation.date|date('Y-m-d') : '' }}</td>
+                <td>{{ plan_formation.salle }}</td>
+                <td>{{ plan_formation.description }}</td>
+                <td>
+                    <a href="{{ path('plan_formation_show', {'id': plan_formation.id}) }}">show</a>
+                    <a href="{{ path('plan_formation_edit', {'id': plan_formation.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('plan_formation_new') }}">Create new</a>
+{% endblock %}

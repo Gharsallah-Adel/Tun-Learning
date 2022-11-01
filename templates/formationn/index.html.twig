@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formationn index{% endblock %}
+
+{% block body %}
+    <h1>Formationn index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>DateDebut</th>
+                <th>DateFin</th>
+                <th>NombrePart</th>
+                <th>Duree</th>
+                <th>Etat</th>
+                <th>Description</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for formationn in formationns %}
+            <tr>
+                <td>{{ formationn.id }}</td>
+                <td>{{ formationn.dateDebut ? formationn.dateDebut|date('Y-m-d') : '' }}</td>
+                <td>{{ formationn.dateFin ? formationn.dateFin|date('Y-m-d') : '' }}</td>
+                <td>{{ formationn.nombrePart }}</td>
+                <td>{{ formationn.duree }}</td>
+                <td>{{ formationn.etat }}</td>
+                <td>{{ formationn.description }}</td>
+                <td>
+                    <a href="{{ path('formationn_show', {'id': formationn.id}) }}">show</a>
+                    <a href="{{ path('formationn_edit', {'id': formationn.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('formationn_new') }}">Create new</a>
+{% endblock %}
